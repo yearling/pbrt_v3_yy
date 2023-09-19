@@ -37,7 +37,7 @@
 #include "parser.h"
 #include "parallel.h"
 #include <glog/logging.h>
-
+#include "easy/profiler.h"
 using namespace pbrt;
 
 static void usage(const char *msg = nullptr) {
@@ -74,6 +74,8 @@ Reformatting options:
 
 // main program
 int main(int argc, char *argv[]) {
+    EASY_PROFILER_ENABLE;
+    EASY_MAIN_THREAD;
     google::InitGoogleLogging(argv[0]);
     FLAGS_stderrthreshold = 1; // Warning and above.
 
@@ -169,5 +171,6 @@ int main(int argc, char *argv[]) {
             pbrtParseFile(f);
     }
     pbrtCleanup();
+    profiler::dumpBlocksToFile("test.prof");
     return 0;
 }

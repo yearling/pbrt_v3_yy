@@ -364,6 +364,11 @@ SET_PROPERTY(TARGET Ptex_static ptxinfo halftest ftest rtest wtest PROPERTY FOLD
 INCLUDE_DIRECTORIES ( src/ext/ptex/src/ptex )
 
 ###########################################################################
+# easy profiler
+add_subdirectory(src/ext/easy_profiler)
+INCLUDE_DIRECTORIES (src/ext/easy_profiler/easy_profiler_core/include)
+###########################################################################
+
 # On to pbrt...
 
 SET ( PBRT_CORE_SOURCE
@@ -516,6 +521,7 @@ SET(ALL_PBRT_LIBS
   glog
   Ptex_static
   ${ZLIB_LIBRARY}
+  easy_profiler
 )
 
 # Main renderer

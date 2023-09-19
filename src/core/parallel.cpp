@@ -38,7 +38,7 @@
 #include <list>
 #include <thread>
 #include <condition_variable>
-
+#include "easy/profiler.h"
 namespace pbrt {
 
 // Parallel Local Definitions
@@ -111,6 +111,7 @@ static std::condition_variable workListCondition;
 
 static void workerThreadFunc(int tIndex, std::shared_ptr<Barrier> barrier) {
     LOG(INFO) << "Started execution in worker thread " << tIndex;
+    EASY_BLOCK("workerThreadFunc",profiler::colors::RichRed);
     ThreadIndex = tIndex;
 
     // Give the profiler a chance to do per-thread initialization for

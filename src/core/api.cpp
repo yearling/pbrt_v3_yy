@@ -117,6 +117,7 @@
 
 #include <map>
 #include <stdio.h>
+#include "easy/profiler.h"
 
 namespace pbrt {
 
@@ -869,6 +870,7 @@ Film *MakeFilm(const std::string &name, const ParamSet &paramSet,
 
 // API Function Definitions
 void pbrtInit(const Options &opt) {
+    EASY_BLOCK("pbrtInit",profiler::colors::DarkMagenta);
     PbrtOptions = opt;
     // API Initialization
     if (currentApiState != APIState::Uninitialized)

@@ -56,6 +56,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include "easy/profiler.h"
 
 namespace pbrt {
 
@@ -1092,6 +1093,7 @@ static void parse(std::unique_ptr<Tokenizer> t) {
 }
 
 void pbrtParseFile(std::string filename) {
+    EASY_BLOCK("pbrtParseFile",profiler::colors::Lime);
     if (filename != "-") SetSearchDirectory(DirectoryContaining(filename));
 
     auto tokError = [](const char *msg) { Error("%s", msg); exit(1); };

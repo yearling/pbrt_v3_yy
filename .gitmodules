@@ -10,3 +10,6 @@
 [submodule "src/ext/ptex"]
 	path = src/ext/ptex
 	url = https://github.com/wdas/ptex.git
+[submodule "src/ext/easy_profiler"]
+	path = src/ext/easy_profiler
+	url = git@github.com:yearling/easy_profiler_yy.git

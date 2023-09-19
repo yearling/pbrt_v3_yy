@@ -42,7 +42,7 @@
 #include "progressreporter.h"
 #include "camera.h"
 #include "stats.h"
-
+#include "easy/profiler.h"
 namespace pbrt {
 
 STAT_COUNTER("Integrator/Camera rays traced", nCameraRays);
@@ -226,6 +226,7 @@ std::unique_ptr<Distribution1D> ComputeLightPowerDistribution(
 
 // SamplerIntegrator Method Definitions
 void SamplerIntegrator::Render(const Scene &scene) {
+    EASY_BLOCK("SamplerIntegrator::Render",profiler::colors::Purple);
     Preprocess(scene, *sampler);
     // Render image tiles in parallel
 
@@ -237,6 +238,7 @@ void SamplerIntegrator::Render(const Scene &scene) {
                    (sampleExtent.y + tileSize - 1) / tileSize);
     ProgressReporter reporter(nTiles.x * nTiles.y, "Rendering");
     {
+        EASY_BLOCK("SamplerIntegrator::ParallelFor2D",profiler::colors::DarkBlue);
         ParallelFor2D([&](Point2i tile) {
             // Render section of image corresponding to _tile_
 
